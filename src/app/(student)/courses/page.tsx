@@ -35,7 +35,7 @@ async function fetchCourses(query: string, category: string): Promise<CourseMini
   if (category) url.searchParams.set('category', category);
 
   try {
-    const res = await fetch(url.toString(), { next: { revalidate: 60 } });
+    const res = await fetch(url.toString(), { cache: 'no-store' });
     if (!res.ok) return [];
     const data = await res.json();
     return data.courses || data.data?.courses || data.data || [];

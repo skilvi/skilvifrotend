@@ -26,9 +26,9 @@ export default async function HomePage() {
 
   try {
     const [featuredRes, categoriesRes, configRes] = await Promise.all([
-      fetch(`${backendUrl}/search/courses?sortBy=rating&limit=8`, { next: { revalidate: 60 } }),
-      fetch(`${backendUrl}/courses/categories`, { next: { revalidate: 3600 } }),
-      fetch(`${backendUrl}/system/config`, { next: { revalidate: 300 } }),
+      fetch(`${backendUrl}/search/courses?sortBy=rating&limit=8`, { cache: 'no-store' }),
+      fetch(`${backendUrl}/courses/categories`, { cache: 'no-store' }),
+      fetch(`${backendUrl}/system/config`, { cache: 'no-store' }),
     ]);
     
     if (featuredRes.ok) {

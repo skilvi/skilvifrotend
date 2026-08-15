@@ -12,7 +12,7 @@ import { getServerBackendUrl } from '@/lib/api/server-url';
 const getCachedCourseDetails = cache(async (id: string) => {
   const backendUrl = getServerBackendUrl();
   const url = `${backendUrl}/courses/${id}`;
-  const res = await fetch(url, { next: { revalidate: 3600 } });
+  const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) {
     if (res.status === 404) return null;
     throw new Error(`Failed to fetch course: ${res.statusText}`);
