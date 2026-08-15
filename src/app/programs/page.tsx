@@ -24,8 +24,10 @@ const CATEGORY_LABELS: Record<string, string> = {
   'Marketing': 'Marketing',
 };
 
+import { getServerBackendUrl } from '@/lib/api/server-url';
+
 async function fetchCourses(query: string, category: string): Promise<CourseMinimal[]> {
-  const backendUrl = process.env.NEXT_PUBLIC_API_URL!;
+  const backendUrl = getServerBackendUrl();
   const url = new URL(`${backendUrl}/search/courses`);
   url.searchParams.set('limit', '40');
   if (query) url.searchParams.set('q', query);
@@ -41,6 +43,8 @@ async function fetchCourses(query: string, category: string): Promise<CourseMini
     return [];
   }
 }
+
+export const dynamic = 'force-dynamic';
 
 export default async function ProgramsPage({
   searchParams,

@@ -7,14 +7,15 @@ import { discoveryApi } from '@/lib/api/discovery';
 import { HeroSlideshow } from '@/components/ui/HeroSlideshow';
 import { GraduationCap, Infinity, Award } from 'lucide-react';
 
+import { getServerBackendUrl } from '@/lib/api/server-url';
+
 export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
   let featuredCourses = [];
   let categories = [];
-  const isProd = process.env.NODE_ENV === 'production';
-  const prodApiUrl = 'http://courseservermain-env.eba-6svqvpng.ap-south-1.elasticbeanstalk.com/api/v1';
-  const backendUrl = process.env.NEXT_PUBLIC_API_URL || (isProd ? prodApiUrl : 'http://localhost:5050/api/v1');
+  const backendUrl = getServerBackendUrl();
 
   let stats = {
     expertCourses: '2',

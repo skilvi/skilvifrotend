@@ -6,9 +6,18 @@ const isBrowser = typeof window !== 'undefined';
 const isProd = process.env.NODE_ENV === 'production';
 // BUG FIX #26: Removed hardcoded plain-text HTTP production URL.
 // Production URLs should always be injected via environment variables (HTTPS).
-const API_URL = isBrowser 
-  ? '/api/v1' 
-  : (process.env.NEXT_PUBLIC_API_URL || (isProd ? 'https://api.skilvi.in/api/v1' : 'http://localhost:5050/api/v1'));
+  let serverApiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+  if (serverApiUrl && !serverApiUrl.endsWith('/api/v1')) {
+    if (serverApiUrl.endsWith('/')) {
+      serverApiUrl = `${serverApiUrl}api/v1`;
+    } else {
+      serverApiUrl = `${serverApiUrl}/api/v1`;
+    }
+  }
+
+  const API_URL = isBrowser 
+    ? '/api/v1' 
+    : (serverApiUrl || (isProd ? 'http://courseservermain-env.eba-6svqvpng.ap-south-1.elasticbeanstalk.com/api/v1' : 'http://localhost:5050/api/v1'));
 
 export const apiClient = axios.create({
   baseURL: API_URL,

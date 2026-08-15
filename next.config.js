@@ -40,20 +40,6 @@ const nextConfig = {
       },
     ];
   },
-  async rewrites() {
-    const isProd = process.env.NODE_ENV === 'production';
-    const prodApiUrl = 'http://courseservermain-env.eba-6svqvpng.ap-south-1.elasticbeanstalk.com/api/v1';
-    
-    // FORCE destination to the backend. If NEXT_PUBLIC_API_URL accidentally points to Vercel, it creates an infinite 500 loop.
-    const apiUrl = isProd ? prodApiUrl : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5050/api/v1');
-    
-    return [
-      {
-        source: '/api/v1/:path*',
-        destination: `${apiUrl}/:path*`,
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;

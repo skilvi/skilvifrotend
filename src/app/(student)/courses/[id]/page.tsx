@@ -6,9 +6,11 @@ import { Suspense, cache } from 'react';
 import CourseDetailLoading from './loading';
 import type { Metadata } from 'next';
 
+import { getServerBackendUrl } from '@/lib/api/server-url';
+
 // Use native fetch to leverage Next.js Data Cache (ISR). Axios bypasses Next.js cache.
 const getCachedCourseDetails = cache(async (id: string) => {
-  const backendUrl = process.env.NEXT_PUBLIC_API_URL!;
+  const backendUrl = getServerBackendUrl();
   const url = `${backendUrl}/courses/${id}`;
   const res = await fetch(url, { next: { revalidate: 3600 } });
   if (!res.ok) {

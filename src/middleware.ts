@@ -57,11 +57,16 @@ export async function middleware(request: NextRequest) {
 
   try {
     // Call the backend's public status endpoint
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
     const isProd = process.env.NODE_ENV === 'production';
-    // BUG FIX #26: Removed hardcoded plain-text HTTP production URL.
-    const backendUrl =
-      process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') ||
-      (isProd ? 'https://api.skilvi.in' : 'http://localhost:5050');
+    
+    // If NEXT_PUBLIC_API_URL is relative (e.g. /api/v1), we need an absolute URL for Edge fetch
+    let backendUrl = 'http://localhost:5050';
+    if (apiUrl.startsWith('http')) {
+      backendUrl = apiUrl.replace('/api/v1', '');
+    } else if (isProd) {
+      backendUrl = 'http://courseservermain-env.eba-6svqvpng.ap-south-1.elasticbeanstalk.com';
+    }
 
     const statusRes = await fetch(`${backendUrl}/api/v1/system/status`, {
       next: { revalidate: 10 }, // Cache for 10 seconds to avoid hammering the endpoint

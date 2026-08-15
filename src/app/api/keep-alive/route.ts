@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 
+import { getServerBackendUrl } from '@/lib/api/server-url';
+
 export async function GET() {
-  const backendUrl = process.env.NEXT_PUBLIC_API_URL!;
+  const backendUrl = getServerBackendUrl();
   
   try {
     // Ping the backend's health endpoint to reset its sleep timer (in case this was invoked externally)

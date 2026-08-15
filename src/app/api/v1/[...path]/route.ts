@@ -1,34 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// This catch-all proxy replaces next.config.js rewrites to solve Vercel Edge 500 errors.
-// Vercel Edge often blocks or fails to proxy to HTTP backends (like AWS Elastic Beanstalk).
-// By using a Node.js Serverless function, we can reliably proxy requests and manage headers.
+// App Router catch-all proxy: /api/v1/[...path] → Elastic Beanstalk backend
+// Using a Serverless Function (not Edge) so cookies and HTTP (non-HTTPS) backends work reliably.
+
+const BACKEND_BASE = process.env.NODE_ENV === 'production'
+  ? 'http://courseservermain-env.eba-6svqvpng.ap-south-1.elasticbeanstalk.com/api/v1'
+  : 'http://localhost:5050/api/v1';
 
 async function shadowProxy(req: NextRequest) {
-  const isProd = process.env.NODE_ENV === 'production';
-  // FORCE the backend URL in production to prevent infinite loops if NEXT_PUBLIC_API_URL was set to the Vercel domain.
-  const backendBase = isProd 
-    ? 'http://courseservermain-env.eba-6svqvpng.ap-south-1.elasticbeanstalk.com/api/v1' 
-    : 'http://localhost:5050/api/v1';
-
   const url = new URL(req.url);
+  // Strip /api/v1 prefix from the path since BACKEND_BASE already includes it
   const path = url.pathname.replace(/^\/api\/v1/, '');
-  const targetUrl = `${backendBase}${path}${url.search}`;
+  const targetUrl = `${BACKEND_BASE}${path}${url.search}`;
 
-  const headers = new Headers(req.headers);
-  headers.delete('host');
-  headers.delete('connection');
-  headers.delete('content-length'); // Let fetch recalculate this
+  // Forward all headers, but sanitize problematic ones
+  const headers = new Headers();
+  req.headers.forEach((value, key) => {
+    // Skip headers that cause issues when proxying
+    const skip = ['host', 'connection', 'content-length', 'transfer-encoding'];
+    if (!skip.includes(key.toLowerCase())) {
+      headers.set(key, value);
+    }
+  });
 
-  let body = undefined;
+  // Explicitly forward cookies so HttpOnly refresh tokens reach the backend
+  const cookieHeader = req.headers.get('cookie');
+  if (cookieHeader) {
+    headers.set('cookie', cookieHeader);
+  }
+
+  // Forward the real client IP for rate limiting / audit logging
+  const realIp = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip');
+  if (realIp) {
+    headers.set('x-forwarded-for', realIp);
+  }
+
+  let body: ArrayBuffer | undefined = undefined;
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     try {
-      const arrayBuffer = await req.arrayBuffer();
-      if (arrayBuffer.byteLength > 0) {
-        body = arrayBuffer;
-      }
+      const buf = await req.arrayBuffer();
+      if (buf.byteLength > 0) body = buf;
     } catch (e) {
-      console.warn("Failed to read request body:", e);
+      console.warn('[Proxy] Failed to read request body:', e);
     }
   }
 
@@ -37,7 +50,7 @@ async function shadowProxy(req: NextRequest) {
       method: req.method,
       headers,
       body,
-      redirect: 'manual', 
+      redirect: 'manual',
     });
 
     const res = new NextResponse(response.body, {
@@ -45,8 +58,8 @@ async function shadowProxy(req: NextRequest) {
       statusText: response.statusText,
     });
 
+    // Forward response headers (skip content-encoding — Next.js handles it)
     response.headers.forEach((value, key) => {
-      // Don't forward content-encoding, let Next.js handle compression
       if (key.toLowerCase() !== 'content-encoding') {
         res.headers.set(key, value);
       }
@@ -54,10 +67,10 @@ async function shadowProxy(req: NextRequest) {
 
     return res;
   } catch (error: any) {
-    console.error(`[Proxy Error] Failed to fetch ${targetUrl}:`, error);
+    console.error(`[Proxy] Failed to reach backend at ${targetUrl}:`, error.message);
     return NextResponse.json(
-      { message: 'Proxy Error: Could not connect to backend', error: error.message },
-      { status: 500 }
+      { message: 'Proxy Error: Could not connect to backend.', error: error.message },
+      { status: 502 }
     );
   }
 }
@@ -68,3 +81,6 @@ export const PUT = shadowProxy;
 export const PATCH = shadowProxy;
 export const DELETE = shadowProxy;
 export const OPTIONS = shadowProxy;
+
+// Force Node.js runtime — required for HTTP backends and cookie forwarding
+export const runtime = 'nodejs';
