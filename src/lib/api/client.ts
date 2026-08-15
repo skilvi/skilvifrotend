@@ -7,6 +7,13 @@ const isProd = process.env.NODE_ENV === 'production';
 // BUG FIX #26: Removed hardcoded plain-text HTTP production URL.
 // Production URLs should always be injected via environment variables (HTTPS).
   let serverApiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+  if (serverApiUrl.endsWith('/')) {
+    serverApiUrl = serverApiUrl.slice(0, -1);
+  }
+
+  // Clean double slashes
+  serverApiUrl = serverApiUrl.replace(/([^:]\/)\/+/g, "$1");
+
   if (serverApiUrl && !serverApiUrl.endsWith('/api/v1')) {
     if (serverApiUrl.endsWith('/')) {
       serverApiUrl = `${serverApiUrl}api/v1`;

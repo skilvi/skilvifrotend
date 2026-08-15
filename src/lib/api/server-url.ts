@@ -7,6 +7,10 @@ export function getServerBackendUrl(): string {
     apiUrl = apiUrl.slice(0, -1);
   }
 
+  // Aggressively clean up any double slashes (e.g. from user input errors like .com//api/v1)
+  // except for the http:// or https:// part
+  apiUrl = apiUrl.replace(/([^:]\/)\/+/g, "$1");
+
   // Ensure /api/v1 is present (User might have set it to just the domain)
   if (apiUrl && !apiUrl.endsWith('/api/v1')) {
     apiUrl = `${apiUrl}/api/v1`;
