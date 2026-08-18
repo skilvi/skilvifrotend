@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Shield, Target, Cpu, Zap, Globe, Award } from 'lucide-react';
 
 export default function AboutPage() {
@@ -43,7 +44,7 @@ export default function AboutPage() {
               <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                 <Cpu size={24} />
               </div>
-              <h3 className="text-xl font-black uppercase tracking-wider mb-4">Pure Metadata</h3>
+              <h3 className="text-xl font-black uppercase tracking-wider mb-4">Progress-Driven Learning</h3>
               <p className="text-slate-500 leading-relaxed font-medium">
                 Our platform leverages advanced AI to map your progress against global engineering benchmarks in real-time.
               </p>
@@ -71,13 +72,13 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-6 text-slate-400 font-medium leading-relaxed text-lg">
               <p>
-                EmberQuest didn't start in a boardroom. It started in the terminal. Our founders, veterans of high-frequency trading and aerospace software, saw a recurring problem: new hires with degrees but no "battlefield" intuition.
+                EmberQuest didn't start in a boardroom. It started in the terminal. Our founders, practitioners from high-stakes engineering environments, saw a recurring problem: new hires with degrees but no "battlefield" intuition.
               </p>
               <p>
                 We spent two years building a curriculum platform that doesn't just deliver videos, but simulates the pressure and complexity of real-world systems.
               </p>
               <p>
-                Today, EmberQuest is the standard for engineers who refuse to be "average." We are the curators of the 1% — the builders who define the next decade of technology.
+                Today, EmberQuest is the standard for engineers who refuse to be "average." We empower builders who will define the next decade of technology.
               </p>
             </div>
             <div className="flex gap-8 pt-4">
@@ -92,7 +93,7 @@ export default function AboutPage() {
               </div>
               <div className="w-px h-12 bg-white dark:bg-slate-900/10"></div>
               <div>
-                <div className="text-3xl font-black text-white">99%</div>
+                <div className="text-3xl font-black text-white">94%</div>
                 <div className="text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-400">Success Rate</div>
               </div>
             </div>
@@ -102,7 +103,7 @@ export default function AboutPage() {
              <div className="aspect-square rounded-3xl bg-gradient-to-br from-blue-600/20 to-indigo-600/20 border border-white/10 relative overflow-hidden group">
                 <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
                   <div className="text-xs font-black uppercase tracking-widest text-blue-400 mb-2">EmberQuest Mission Control</div>
-                  <div className="text-sm font-medium text-slate-300">Synchronizing global engineering standards across 142 countries.</div>
+                  <div className="text-sm font-medium text-slate-300">Synchronizing global engineering standards across 14+ countries.</div>
                 </div>
                 {/* Visual "Radar" effect */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-2 border-blue-500/20 rounded-full animate-ping"></div>
@@ -120,11 +121,16 @@ export default function AboutPage() {
             READY TO JOIN THE <br/>
             <span className="text-blue-500">NEW VANGUARD?</span>
           </h2>
-          <button className="px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest rounded-2xl transition-all shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95">
+          <Link href="/register" className="inline-block px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest rounded-2xl transition-all shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95">
             Begin Your Ascension
-          </button>
+          </Link>
         </div>
       </section>
+
+      {/* Operator Identity */}
+      <div className="py-8 text-center border-t border-white/5 relative z-10">
+         <p className="text-xs font-semibold text-slate-500 tracking-widest uppercase">Operated by Skilvi</p>
+      </div>
 
     </div>
   );

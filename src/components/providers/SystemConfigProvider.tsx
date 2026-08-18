@@ -14,7 +14,7 @@ export interface SystemConfig {
 
 const defaultConfig: SystemConfig = {
   platformName: 'EmberQuest',
-  supportEmail: 'support@emberquest.in',
+  supportEmail: 'support.skilvi@gmail.com',
   contactPhone: '',
   enableRegistration: true,
   enableCourseReviews: true,

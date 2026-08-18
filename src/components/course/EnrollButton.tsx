@@ -224,7 +224,7 @@ export function EnrollButton({ courseId, price, courseTitle, partialAmount = 499
         key: razorpayKey,
         amount: order.amount * 100, 
         currency: order.currency || 'INR',
-        name: 'EmberQuest',
+        name: 'Skilvi',
         description: courseTitle || 'Course Enrollment',
         order_id: order.orderId,
         handler: async (response: any) => {
@@ -328,7 +328,7 @@ export function EnrollButton({ courseId, price, courseTitle, partialAmount = 499
           {/* Payment Mode Selector */}
           <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl shadow-inner border border-slate-200 dark:border-slate-700">
              <button onClick={() => setPaymentMode('FULL')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${paymentMode === 'FULL' ? 'bg-white dark:bg-slate-700 shadow text-slate-900 dark:text-slate-50' : 'text-slate-500 hover:text-slate-700'}`}>Full Payment</button>
-             <button onClick={() => setPaymentMode('PARTIAL')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${paymentMode === 'PARTIAL' ? 'bg-white dark:bg-slate-700 shadow text-slate-900 dark:text-slate-50' : 'text-slate-500 hover:text-slate-700'}`}>Partial (₹{partialAmount})</button>
+             <button onClick={() => setPaymentMode('PARTIAL')} title={`Pay ₹${partialAmount} now to lock in your spot. Pay remaining to unlock all content`} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${paymentMode === 'PARTIAL' ? 'bg-white dark:bg-slate-700 shadow text-slate-900 dark:text-slate-50' : 'text-slate-500 hover:text-slate-700'}`}>Partial (₹{partialAmount})</button>
           </div>
 
           {/* Coupon Code (Only for Full) */}
@@ -401,7 +401,8 @@ export function EnrollButton({ courseId, price, courseTitle, partialAmount = 499
       >
         {loading ? 'Processing...' : isUpgrade ? 'Pay Remaining Balance' : finalPrice > 0 ? `Enroll Now — ₹${finalPrice.toLocaleString()}` : 'Enroll for Free'}
       </button>
-      <div className="flex items-center justify-center gap-2 mt-4 opacity-60">
+
+      <div className="flex items-center justify-center gap-2 mt-3 opacity-60">
          <img src="/razorpay.png" alt="Secured by Razorpay" className="h-5 object-contain" />
       </div>
     </>

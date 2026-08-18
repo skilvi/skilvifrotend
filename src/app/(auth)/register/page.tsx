@@ -54,33 +54,33 @@ function RegisterFormContent() {
   return (
     <div className="min-h-screen flex bg-white dark:bg-slate-900">
       {/* Left: Brand panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-blue-600 to-blue-700 items-center justify-center relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-[#395ce5] items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white dark:bg-slate-900/5 rounded-full translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white dark:bg-slate-900/5 rounded-full -translate-x-1/3 translate-y-1/3" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/3 translate-y-1/3" />
           <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)',
-            backgroundSize: '28px 28px'
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.15) 1.5px, transparent 1.5px)',
+            backgroundSize: '32px 32px'
           }} />
         </div>
-        <div className="relative z-10 text-center text-white space-y-6 px-12">
+        <div className="relative z-10 text-center space-y-8 px-12">
           <img src="/logo.svg" alt={config.platformName} className="h-16 w-auto object-contain filter invert brightness-200 mx-auto" />
           <div>
-            <h2 className="text-4xl font-bold tracking-tight">{config.platformName}</h2>
-            <a href="https://www.skilvi.in" target="_blank" rel="noopener noreferrer" className="block text-blue-200 text-sm font-semibold mt-1 uppercase tracking-widest hover:text-white transition-colors">powered by Skilvi</a>
+            <h2 className="text-5xl font-black tracking-tight text-[#0f172a]">{config.platformName}</h2>
+            <a href="https://www.skilvi.in" target="_blank" rel="noopener noreferrer" className="block text-white/90 text-sm font-bold mt-2 uppercase tracking-[0.2em] hover:text-white transition-colors">powered by Skilvi</a>
           </div>
-          <p className="text-blue-100 text-lg font-medium leading-relaxed max-w-xs mx-auto">
+          <p className="text-white text-xl font-medium leading-relaxed max-w-sm mx-auto">
             Join thousands of developers building world-class engineering skills.
           </p>
-          <div className="flex flex-col gap-3 text-sm text-blue-100">
-            {['Expert-taught curriculums', 'Lifetime course access', 'Industry certificates', 'Community of engineers'].map((feature) => (
-              <div key={feature} className="flex items-center gap-3 justify-center">
-                <div className="w-5 h-5 bg-white dark:bg-slate-900/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+          <div className="flex flex-col gap-4 text-base text-white mt-8">
+            {['Expert-taught curriculums', 'Full course access', 'Industry certificates', 'Community of engineers'].map((feature) => (
+              <div key={feature} className="flex items-center gap-4 justify-center">
+                <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg className="w-4 h-4 text-[#395ce5]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </div>
-                {feature}
+                <span>{feature}</span>
               </div>
             ))}
           </div>
@@ -118,7 +118,7 @@ function RegisterFormContent() {
             <div className="w-full space-y-8">
               <div>
                 <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight">Create your account</h1>
-                <p className="text-slate-500 text-sm mt-1 font-medium">Start your learning journey today. Free forever.</p>
+                <p className="text-slate-500 text-sm mt-1 font-medium">Create your free account and start exploring.</p>
               </div>
 
           {/* Error */}
@@ -144,6 +144,9 @@ function RegisterFormContent() {
             </svg>
             Continue with Google
           </a>
+          <p className="text-[11px] text-slate-500 text-center mt-2">
+            By continuing, you agree to our <a href="https://www.emberquest.in/terms-of-service" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-700 dark:hover:text-slate-300">Terms</a> and <a href="https://www.emberquest.in/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-700 dark:hover:text-slate-300">Privacy Policy</a>.
+          </p>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -203,6 +206,23 @@ function RegisterFormContent() {
               {errors.password && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.password.message}</p>}
             </div>
 
+            <div className="flex items-start gap-3 mt-4">
+              <div className="flex items-center h-5">
+                <input
+                  id="agreeToTerms"
+                  type="checkbox"
+                  {...register('agreeToTerms')}
+                  className="w-4 h-4 border border-slate-300 rounded bg-slate-50 focus:ring-3 focus:ring-blue-300 dark:bg-slate-700 dark:border-slate-600 dark:focus:ring-blue-600 dark:ring-offset-slate-800"
+                />
+              </div>
+              <div className="text-sm">
+                <label htmlFor="agreeToTerms" className="font-medium text-slate-700 dark:text-slate-300">
+                  I agree to the <a href="https://www.emberquest.in/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Terms of Service</a> and acknowledge the <a href="https://www.emberquest.in/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Privacy Policy</a> and <a href="https://www.emberquest.in/acceptable-use-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Acceptable Use Policy</a>.
+                </label>
+                {errors.agreeToTerms && <p className="text-red-500 text-xs mt-1 font-medium">{errors.agreeToTerms.message}</p>}
+              </div>
+            </div>
+
             <button
               type="submit"
               disabled={isSubmitting || isRedirecting}
@@ -218,12 +238,6 @@ function RegisterFormContent() {
                 </span>
               ) : 'Create Account — Free'}
             </button>
-
-            <p className="text-center text-xs text-slate-400 font-medium">
-              By creating an account you agree to our{' '}
-              <a href="/terms" className="text-blue-600 hover:underline">Terms</a> and{' '}
-              <a href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</a>.
-            </p>
           </form>
 
           <div className="space-y-3 pt-2">
@@ -259,7 +273,7 @@ function RegisterFormContent() {
       {(isRedirecting || isSubmitting) && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm" style={{ pointerEvents: 'auto' }}>
           <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-slate-700 dark:text-slate-200 font-medium">Loading dashboard... secure login</p>
+          <p className="text-slate-700 dark:text-slate-200 font-medium">Setting up your workspace…</p>
         </div>
       )}
     </div>

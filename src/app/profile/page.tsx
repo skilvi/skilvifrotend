@@ -114,7 +114,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">Account Type</span>
-                  <span className="text-sm font-black text-blue-600 capitalize">{user.role}</span>
+                  <span className="text-sm font-black text-blue-600">{(user.role || '').charAt(0).toUpperCase() + (user.role || '').slice(1)}</span>
                 </div>
               </div>
             </div>
@@ -206,6 +206,23 @@ export default function ProfilePage() {
                   </button>
                 </div>
               </form>
+            </div>
+
+            {/* Security Section */}
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-800/50 p-8 mt-6">
+              <h2 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-6">Security</h2>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800/50">
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-50">Password</h3>
+                  <p className="text-xs text-slate-500 mt-1">Change your account password securely.</p>
+                </div>
+                <Link 
+                  href="/forgot-password" 
+                  className="px-6 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold text-sm rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm whitespace-nowrap text-center"
+                >
+                  Change Password
+                </Link>
+              </div>
             </div>
           </div>
         </div>

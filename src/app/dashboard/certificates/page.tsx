@@ -131,7 +131,7 @@ export default function DashboardCertificates() {
             <div className="space-y-3">
               <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight">No certificates found yet.</h3>
               <p className="text-slate-500 max-w-sm mx-auto font-medium leading-relaxed">
-                Complete a course, workshop, internship or certification to see records here.
+                Complete any enrolled course to earn your first certificate. <a href="/programs" className="text-blue-600 hover:underline font-semibold">Browse Courses →</a>
               </p>
             </div>
           </div>
@@ -176,15 +176,19 @@ function RecordSection({ title, records }: { title: string, records: any[] }) {
                 </div>
                 
                 <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50 leading-tight mb-2 pr-4">{record.programName}</h3>
-                <p className="text-xs font-medium text-slate-500 mb-6 font-mono bg-slate-50 dark:bg-slate-800/50 p-1.5 rounded w-fit border border-slate-100 dark:border-slate-800/50">
+                <p className="text-xs font-medium text-slate-500 mb-2 font-mono bg-slate-50 dark:bg-slate-800/50 p-1.5 rounded w-fit border border-slate-100 dark:border-slate-800/50">
                   ID: {record.certificateId}
                 </p>
+                <p className="text-[11px] font-medium text-slate-400 mb-6">
+                  Issued by EmberQuest, verified by Skilvi
+                </p>
                 
-                <div className="flex items-center gap-3">
-                  <a href={record.verificationUrl} target="_blank" rel="noopener noreferrer" className={`flex-1 inline-flex justify-center items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-colors ${buttonClasses}`}>
-                    View Certificate
-                  </a>
-                </div>
+                  <div className="flex flex-col w-full gap-2">
+                    <a href={record.verificationUrl} target="_blank" rel="noopener noreferrer" className={`w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-colors ${buttonClasses}`}>
+                      View Certificate
+                    </a>
+                    <p className="text-[10px] text-slate-400 text-center font-medium">Share this link with employers to verify your achievement.</p>
+                  </div>
               </div>
             </div>
           );

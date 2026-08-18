@@ -301,13 +301,20 @@ export function CourseDetailClient({ course, sections: initialSections }: Course
               </div>
 
               {!isEnrolled && (
-                <div className="text-4xl font-extrabold mb-6 text-slate-900 dark:text-slate-50 flex items-baseline gap-2">
-                  {course.price > 0 ? (
-                    <>
-                       <span className="text-lg font-semibold text-slate-400 line-through">₹{(course.price * 1.5).toLocaleString()}</span>
-                       ₹{course.price.toLocaleString()}
-                    </>
-                  ) : 'FREE'}
+                <div className="flex flex-col mb-6">
+                  <div className="text-4xl font-extrabold text-slate-900 dark:text-slate-50 flex items-baseline gap-2">
+                    {course.price > 0 ? (
+                      <>
+                         {course.originalPrice && course.originalPrice > course.price && (
+                           <span className="text-lg font-semibold text-slate-400 line-through">₹{course.originalPrice.toLocaleString()}</span>
+                         )}
+                         ₹{course.price.toLocaleString()}
+                      </>
+                    ) : 'FREE'}
+                  </div>
+                  {course.price > 0 && (
+                    <span className="text-sm font-medium text-slate-500 mt-1">(incl. 18% GST if applied)</span>
+                  )}
                 </div>
               )}
 
@@ -337,17 +344,30 @@ export function CourseDetailClient({ course, sections: initialSections }: Course
                 </div>
               )}
 
-              <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/50 space-y-3">
+              {!isEnrolled && (
+                <div className="mt-5 flex flex-col items-center justify-center gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/50">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">100% Secure Payments</span>
+                  <img 
+                    src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" 
+                    alt="Trusted payments by Razorpay" 
+                    className="h-5"
+                  />
+                </div>
+              )}
+
+              <div className="mt-5 pt-5 border-t border-slate-100 dark:border-slate-800/50 space-y-3">
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Program Includes</p>
                 {[
                   { icon: PlayCircle, label: `${totalLecturesCount} Deep-Dive Lectures` },
                   { icon: FileText, label: 'Industry-Standard Projects' },
-                  { icon: Trophy, label: 'Certificate of Completion' },
-                  { icon: Download, label: 'Lifetime Access' },
-                ].map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-300">
-                    <Icon className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                    {label}
+                  { icon: Trophy, label: 'Verifiable Certificate of Completion (Issued by EmberQuest, Powered by Skilvi)', subtext: 'Certificate awarded upon completing all course modules.' },
+                ].map(({ icon: Icon, label, subtext }) => (
+                  <div key={label} className="flex items-start gap-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <Icon className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p>{label}</p>
+                      {subtext && <p className="text-xs text-slate-500 mt-0.5 font-normal">{subtext}</p>}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -508,7 +528,7 @@ export function CourseDetailClient({ course, sections: initialSections }: Course
             )}
             
             {/* Instructor Bio */}
-            {(course.metadata?.instructorBio || course.instructor?.displayName) && (
+            {course.metadata?.instructorBio && (
               <section className="bg-white dark:bg-slate-900 rounded-[20px] p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
                 <h2 className="text-xl font-bold mb-6 text-slate-900 dark:text-slate-50 tracking-tight">Instructor</h2>
                 <div className="flex items-center gap-4 mb-4">
@@ -520,11 +540,7 @@ export function CourseDetailClient({ course, sections: initialSections }: Course
                     <p className="text-slate-500 text-sm">Course Lead</p>
                   </div>
                 </div>
-                {course.metadata?.instructorBio ? (
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{course.metadata.instructorBio}</p>
-                ) : (
-                  <p className="text-slate-500 text-sm italic">The instructor hasn't added a bio yet.</p>
-                )}
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{course.metadata.instructorBio}</p>
               </section>
             )}
           </div>
@@ -615,7 +631,7 @@ export function CourseDetailClient({ course, sections: initialSections }: Course
                       </article>
                    )) : (
                       <div className="text-center py-12 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
-                         <p className="text-slate-500 font-medium">No reviews yet.</p>
+                         <p className="text-slate-500 font-medium">Be the first to review after completing this course.</p>
                       </div>
                    )}
                 </div>

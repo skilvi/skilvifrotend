@@ -6,7 +6,7 @@ export default function TermsPage() {
     {
       title: "1. Enrollment & Access",
       icon: <FileText size={20} />,
-      content: "Upon enrollment in an EmberQuest course, you are granted a non-exclusive, non-transferable license to access the course materials for your personal educational use. Course access duration is specified at the time of purchase (typically lifetime access unless otherwise stated)."
+      content: "Upon enrollment in an EmberQuest course, you are granted a non-exclusive, non-transferable license to access the course materials for your personal educational use. Course access duration is specified at the time of purchase."
     },
     {
       title: "2. Intellectual Property",

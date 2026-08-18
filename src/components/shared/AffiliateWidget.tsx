@@ -37,7 +37,7 @@ export const AffiliateWidget = () => {
     setError('');
 
     try {
-      const PORTAL_URL = process.env.NEXT_PUBLIC_PORTAL_API_URL || 'http://localhost:3000/api/public/auto-enroll';
+      const PORTAL_URL = process.env.NEXT_PUBLIC_PORTAL_API_URL || 'https://member.emberquest.in/api/public/auto-enroll';
       const PORTAL_KEY = process.env.NEXT_PUBLIC_PORTAL_API_KEY || 'super_secret_portal_key_12345';
       
       const res = await fetch(PORTAL_URL, {
@@ -49,7 +49,7 @@ export const AffiliateWidget = () => {
         body: JSON.stringify({
           email,
           displayName,
-          baseUrl: window.location.origin
+          baseUrl: process.env.NEXT_PUBLIC_APP_URL || (window.location.hostname === 'localhost' ? 'https://skilvi.emberquest.in' : window.location.origin)
         })
       });
 
@@ -125,7 +125,7 @@ export const AffiliateWidget = () => {
                   Link generated! Share it to start earning.
                 </p>
                 <div className="text-center mt-3 pt-3 border-t border-slate-700/50">
-                  <a href="https://affiliate.emberquest.in" target="_blank" rel="noopener noreferrer" className="text-xs text-purple-400 hover:text-purple-300 font-medium hover:underline inline-flex items-center gap-1">
+                  <a href="https://member.emberquest.in" target="_blank" rel="noopener noreferrer" className="text-xs text-purple-400 hover:text-purple-300 font-medium hover:underline inline-flex items-center gap-1">
                     Go to Partner Dashboard <span aria-hidden="true">&rarr;</span>
                   </a>
                 </div>

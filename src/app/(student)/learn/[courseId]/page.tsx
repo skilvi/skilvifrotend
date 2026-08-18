@@ -207,7 +207,7 @@ export default function CourseLearningExperience({ params }: { params: { courseI
         key: razorpayKey,
         amount: order.amount * 100, 
         currency: order.currency || 'INR',
-        name: 'EmberQuest',
+        name: 'Skilvi',
         description: 'Course Access Upgrade',
         order_id: order.orderId,
         handler: async (response: any) => {

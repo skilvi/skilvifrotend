@@ -77,6 +77,7 @@ export default function StudentSupportPage() {
         <div>
           <h1 className="text-3xl font-black text-slate-900 dark:text-slate-50 tracking-tight">Support & Help</h1>
           <p className="text-slate-500 font-medium mt-1">Contact our support team for any issues with your account or courses.</p>
+          <p className="text-slate-500 font-medium mt-1 text-sm">We typically respond within 24–48 business hours. For urgent issues: <a href="mailto:emberquest1@gmail.com" className="text-blue-600 hover:underline">emberquest1@gmail.com</a></p>
         </div>
         <button 
           onClick={() => setIsNewModalOpen(true)}
@@ -109,7 +110,7 @@ export default function StudentSupportPage() {
                     ticket.status === 'pending' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' :
                     'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400'
                   }`}>
-                    {ticket.status === 'open' ? 'Waiting Admin' : ticket.status === 'pending' ? 'Action Required' : 'Resolved'}
+                    {ticket.status === 'open' ? 'Under Review' : ticket.status === 'pending' ? 'Action Required' : 'Resolved'}
                   </span>
                 </div>
                 <div className="flex items-center text-xs text-slate-500 gap-1 mt-2">

@@ -118,7 +118,7 @@ export default async function CoursesPage({
         {/* Count row */}
         <p className="text-sm text-slate-500 font-medium mb-6">
           Showing <span className="font-bold text-slate-800 dark:text-slate-200">{courses.length}</span>{' '}
-          {courses.length === 1 ? 'program' : 'programs'}
+          {courses.length === 1 ? 'course' : 'courses'}
           {category ? ` in ${CATEGORY_LABELS[category] || category}` : ''}
           {query ? ` for "${query}"` : ''}
         </p>

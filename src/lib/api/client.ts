@@ -72,7 +72,7 @@ apiClient.interceptors.response.use(
     
     if (typeof window !== 'undefined') {
       const currentPath = window.location.pathname;
-      const isPublicPage = currentPath.includes('/login') || currentPath.includes('/register') || currentPath === '/' || currentPath.startsWith('/terms') || currentPath.startsWith('/privacy') || currentPath.startsWith('/maintenance');
+      const isPublicPage = currentPath.includes('/login') || currentPath.includes('/register') || currentPath.includes('/forgot-password') || currentPath === '/' || currentPath.startsWith('/terms') || currentPath.startsWith('/privacy') || currentPath.startsWith('/maintenance');
       
       const isAuthEndpoint = originalRequest?.url?.includes('/auth/refresh') || 
                              originalRequest?.url?.includes('/auth/login') ||

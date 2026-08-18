@@ -208,7 +208,9 @@ export const CertificateDocument: React.FC<CertPDFProps> = (props) => {
   if (months < 1) months = 1;
 
   // Since React-PDF needs a fully qualified URL sometimes to fetch successfully
-  const logoUrl = typeof window !== 'undefined' ? `${window.location.origin}/logo.png` : "http://localhost:3050/logo.png";
+  const logoUrl = typeof window !== 'undefined' 
+    ? `${window.location.origin}/logo.png` 
+    : `${process.env.NEXT_PUBLIC_APP_URL || 'https://skilvi.emberquest.in'}/logo.png`;
 
   return (
     <Document>

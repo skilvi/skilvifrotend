@@ -144,33 +144,33 @@ function LoginFormContent() {
   return (
     <div className="min-h-screen flex bg-white dark:bg-slate-900">
       {/* Left: Brand panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-blue-600 to-blue-700 items-center justify-center relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-[#395ce5] items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white dark:bg-slate-900/5 rounded-full translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white dark:bg-slate-900/5 rounded-full -translate-x-1/3 translate-y-1/3" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/3 translate-y-1/3" />
           <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)',
-            backgroundSize: '28px 28px'
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.15) 1.5px, transparent 1.5px)',
+            backgroundSize: '32px 32px'
           }} />
         </div>
-        <div className="relative z-10 text-center text-white space-y-6 px-12">
+        <div className="relative z-10 text-center space-y-8 px-12">
           <img src="/logo.svg" alt="EmberQuest" className="h-16 w-auto object-contain filter invert brightness-200 mx-auto" />
           <div>
-            <h2 className="text-4xl font-bold tracking-tight">EmberQuest</h2>
-            <a href="https://www.skilvi.in" target="_blank" rel="noopener noreferrer" className="block text-blue-200 text-sm font-semibold mt-1 uppercase tracking-widest hover:text-white transition-colors">powered by Skilvi</a>
+            <h2 className="text-5xl font-black tracking-tight text-[#0f172a]">EmberQuest</h2>
+            <a href="https://www.skilvi.in" target="_blank" rel="noopener noreferrer" className="block text-white/90 text-sm font-bold mt-2 uppercase tracking-[0.2em] hover:text-white transition-colors">powered by Skilvi</a>
           </div>
-          <p className="text-blue-100 text-lg font-medium leading-relaxed max-w-xs mx-auto">
-            The premium platform for developers who want to become technical leaders.
+          <p className="text-white text-xl font-medium leading-relaxed max-w-sm mx-auto">
+            Join thousands of developers building world-class engineering skills.
           </p>
-          <div className="flex flex-col gap-3 text-sm text-blue-100">
-            {['Expert-taught curriculums', 'Lifetime course access', 'Industry certificates'].map((feature) => (
-              <div key={feature} className="flex items-center gap-3 justify-center">
-                <div className="w-5 h-5 bg-white dark:bg-slate-900/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+          <div className="flex flex-col gap-4 text-base text-white mt-8">
+            {['Expert-taught curriculums', 'Full course access', 'Industry certificates', 'Community of engineers'].map((feature) => (
+              <div key={feature} className="flex items-center gap-4 justify-center">
+                <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg className="w-4 h-4 text-[#395ce5]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </div>
-                {feature}
+                <span>{feature}</span>
               </div>
             ))}
           </div>
@@ -248,6 +248,9 @@ function LoginFormContent() {
             </svg>
             Continue with Google
           </a>
+          <p className="text-[11px] text-slate-500 text-center mt-2">
+            By continuing, you agree to our <a href="https://www.emberquest.in/terms-of-service" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-700 dark:hover:text-slate-300">Terms</a> and <a href="https://www.emberquest.in/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-700 dark:hover:text-slate-300">Privacy Policy</a>.
+          </p>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -277,7 +280,10 @@ function LoginFormContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Password</label>
+              <div className="flex justify-between items-center mb-1.5">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">Password</label>
+                <a href="/forgot-password" className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">Forgot password?</a>
+              </div>
               <input
                 type="password"
                 {...register('password')}
@@ -307,6 +313,10 @@ function LoginFormContent() {
                 </span>
               ) : 'Sign in'}
             </button>
+            
+            <p className="text-center text-[11px] text-slate-500 mt-4 leading-relaxed">
+              By continuing, you agree to our <a href="https://www.emberquest.in/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Terms of Service</a> and acknowledge our <a href="https://www.emberquest.in/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Privacy Policy</a> and <a href="https://www.emberquest.in/acceptable-use-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Acceptable Use Policy</a>. Skilvi may process and manage information necessary to authenticate your account, secure access, and provide and administer our services.
+            </p>
           </form>
 
               <p className="text-center text-sm text-slate-500">
@@ -378,7 +388,7 @@ function LoginFormContent() {
       {(isRedirecting || isSubmitting) && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm" style={{ pointerEvents: 'auto' }}>
           <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-slate-700 dark:text-slate-200 font-medium">Loading dashboard... secure login</p>
+          <p className="text-slate-700 dark:text-slate-200 font-medium">Setting up your workspace…</p>
         </div>
       )}
     </div>

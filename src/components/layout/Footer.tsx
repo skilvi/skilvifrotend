@@ -52,7 +52,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   const { config } = useSystemConfig();
 
-  if (pathname?.startsWith('/embed') || pathname?.startsWith('/programs')) return null;
+  if (pathname?.startsWith('/embed')) return null;
 
   return (
     <footer className="mt-auto bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800">
@@ -90,11 +90,21 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1 pr-6">
             <div className="flex items-center gap-3 group w-fit mb-6">
-              <Link href="/" className="flex items-center gap-3">
+              <a 
+                href="https://www.emberquest.in"
+                data-external="true"
+                className="flex items-center gap-3"
+              >
                 <img src="/logo.svg" alt="EmberQuest" className="h-10 w-auto object-contain dark:invert dark:brightness-200" />
-              </Link>
+              </a>
               <div className="flex flex-col items-start leading-none">
-                <a href="https://www.skilvi.in" className="text-xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">EmberQuest</a>
+                <a 
+                  href="https://www.emberquest.in"
+                  data-external="true"
+                  className="text-xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight"
+                >
+                  EmberQuest
+                </a>
                 <a href="https://www.skilvi.in" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mt-0.5 hover:text-blue-600 transition-colors">POWERED BY SKILVI</a>
               </div>
             </div>
@@ -107,7 +117,7 @@ export function Footer() {
             {/* Contact Info */}
             <div className="space-y-3 mb-8">
               {[
-                { Icon: Mail, text: config.supportEmail || "support@emberquest.in", href: `mailto:${config.supportEmail}` },
+                { Icon: Mail, text: config.supportEmail || "support.skilvi@gmail.com", href: `mailto:${config.supportEmail}` },
                 { Icon: Phone, text: config.contactPhone || "+91 97317 55053", href: `tel:${config.contactPhone}` },
                 { Icon: MapPin, text: "Bangalore, India", href: "/contact" },
               ].map(({ Icon, text, href }) => (
@@ -182,7 +192,7 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex flex-col items-center sm:items-start gap-1">
               <p className="text-sm">
-                © {currentYear} Skilvi Technologies Pvt. Ltd. All rights reserved.
+                © {currentYear} Skilvi. All rights reserved.
               </p>
               <p className="text-[11px] font-medium text-slate-400 text-center sm:text-left tracking-wide">
                 Website Managed by <a href="https://www.skilvi.in" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">skilvi</a>
@@ -192,6 +202,8 @@ export function Footer() {
                <a href="https://www.emberquest.in/privacy-policy" className="hover:text-blue-600 transition">Privacy</a>
                <span>•</span>
                <a href="https://www.emberquest.in/terms-of-service" className="hover:text-blue-600 transition">Terms</a>
+               <span>•</span>
+               <a href="https://www.emberquest.in/acceptable-use-policy" className="hover:text-blue-600 transition">AUP</a>
             </div>
           </div>
         </div>

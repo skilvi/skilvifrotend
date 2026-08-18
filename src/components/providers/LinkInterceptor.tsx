@@ -50,15 +50,17 @@ export function LinkInterceptor({ children }: { children: React.ReactNode }) {
       ];
 
       const isInternalDomain =
-        TRUSTED_DOMAINS.some(d => hostname === d || hostname.endsWith('.' + d)) ||
+        !anchor.hasAttribute('data-external') &&
+        (TRUSTED_DOMAINS.some(d => hostname === d || hostname.endsWith('.' + d)) ||
         hostname.endsWith('.emberquest.in') ||
-        hostname.endsWith('.skilvi.in');
+        hostname.endsWith('.skilvi.in'));
 
       isExternal = !isInternalDomain;
     } catch {
       // If URL parsing fails, assume it's a relative/internal link
       isExternal = false;
     }
+
 
 
     // Do not intercept internal links or the Google OAuth initiation link

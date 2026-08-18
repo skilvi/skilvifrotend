@@ -13,6 +13,7 @@ import { ReferralTracker } from "@/components/providers/ReferralTracker";
 import { AffiliateWidget } from "@/components/shared/AffiliateWidget";
 import { PhoneCaptureModal } from "@/components/shared/PhoneCaptureModal";
 import NextTopLoader from 'nextjs-toploader';
+import CookieBanner from "@/components/legal/CookieBanner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -101,6 +102,7 @@ export default function RootLayout({
           <SystemConfigProvider>
             <ClientSessionProvider>
               <PhoneCaptureModal />
+              <CookieBanner />
               <ToastProvider>
                 <LinkInterceptor>
                   <Header />

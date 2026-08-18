@@ -68,7 +68,7 @@ export function UpgradeModal({ isOpen, onClose, onConfirm, isProcessing, pricing
            
            <ul className="space-y-3 mb-8">
              <li className="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-300">
-                <CheckCircle className="w-4 h-4 text-blue-500 shrink-0" /> Lifetime access to all modules
+                <CheckCircle className="w-4 h-4 text-blue-500 shrink-0" /> Full access to all modules
              </li>
              <li className="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-300">
                 <CheckCircle className="w-4 h-4 text-blue-500 shrink-0" /> Verified Certificate of Completion

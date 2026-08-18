@@ -8,6 +8,7 @@ import { getAvatarUrl } from '@/lib/utils';
 import Image from 'next/image';
 import { ThemeToggle } from './ThemeToggle';
 import { CornerDownLeft } from 'lucide-react';
+import { NotificationInbox } from './NotificationInbox';
 
 function HeaderSearch() {
   const searchParams = useSearchParams();
@@ -73,13 +74,21 @@ export function Header() {
 
           {/* Logo & Brand */}
           <div className="flex items-center gap-3 flex-shrink-0">
-            <Link href="/" className="flex items-center gap-3 group">
+            <a 
+              href="https://www.emberquest.in"
+              data-external="true"
+              className="flex items-center gap-3 group"
+            >
               <img src="/logo.svg" alt="EmberQuest" className="h-10 w-auto object-contain dark:invert dark:brightness-200" />
-            </Link>
+            </a>
             <div className="flex flex-col items-start leading-none">
-              <Link href="/" className="text-xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight hidden sm:block hover:text-blue-600 transition-colors">
+              <a 
+                href="https://www.emberquest.in"
+                data-external="true"
+                className="text-xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight hidden sm:block hover:text-blue-600 transition-colors"
+              >
                 EmberQuest
-              </Link>
+              </a>
               <a href="https://www.skilvi.in" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 tracking-widest hidden sm:block uppercase mt-0.5 hover:text-blue-600 transition-colors">
                 POWERED BY SKILVI
               </a>
@@ -91,6 +100,11 @@ export function Header() {
             <Link href="/courses" className="px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
               Courses
             </Link>
+            {isHydrated && isAuthenticated && (
+              <Link href="/dashboard" className="px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
+                My Learnings
+              </Link>
+            )}
           </div>
 
           {/* Search */}
@@ -102,8 +116,10 @@ export function Header() {
           <div className="flex items-center gap-3 flex-shrink-0">
             <ThemeToggle />
             {isHydrated && isAuthenticated && user ? (
-              <div className="relative">
-                <button
+              <div className="flex items-center gap-3">
+                <NotificationInbox subscriberId={user.id} />
+                <div className="relative">
+                  <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="flex items-center gap-2 p-1.5 pr-3 rounded-full hover:bg-slate-50 dark:bg-slate-800/50 border border-transparent hover:border-slate-200 dark:border-slate-800 transition-all"
                 >
@@ -158,6 +174,13 @@ export function Header() {
                             </svg>
                             My Certificates
                           </Link>
+                          <Link href="/dashboard/purchases" onClick={() => setIsMenuOpen(false)}
+                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                            Purchase History
+                          </Link>
                           <Link href="/dashboard/support" onClick={() => setIsMenuOpen(false)}
                             className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-blue-700 transition-colors">
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -197,6 +220,7 @@ export function Header() {
                   </>
                 )}
               </div>
+            </div>
             ) : isHydrated ? (
               <div className="flex items-center gap-2">
                 <Link href="/login"

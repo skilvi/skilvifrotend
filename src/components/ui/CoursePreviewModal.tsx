@@ -79,7 +79,6 @@ export function CoursePreviewModal({ course, isOpen, onClose }: CoursePreviewMod
                    <h3 className="font-bold text-slate-900 dark:text-slate-50 mb-3">Key Highlights</h3>
                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-600 dark:text-slate-400">
                       <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Hands-on project building</li>
-                      <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Lifetime access to materials</li>
                       <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Industry recognized certificate</li>
                       <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Interactive coding sandboxes</li>
                    </ul>
